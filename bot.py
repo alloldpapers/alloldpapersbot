@@ -1,0 +1,19 @@
+import telebot
+from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
+
+TOKEN = "8400705202:AAENgsxS7uqsHmMDOxeaaI9mKwuv7viVklY"
+bot = telebot.TeleBot(TOKEN)
+
+@bot.message_handler(commands=['start'])
+def start(message):
+    markup = InlineKeyboardMarkup()
+    btn1 = InlineKeyboardButton("📘 2023 Paper", url="https://example.com/2023.pdf")
+    btn2 = InlineKeyboardButton("📘 2022 Paper", url="https://example.com/2022.pdf")
+    btn3 = InlineKeyboardButton("📘 2021 Paper", url="https://example.com/2021.pdf")
+    markup.add(btn1, btn2, btn3)
+    
+    bot.send_message(message.chat.id, 
+                     "📚 Welcome to All Old Papers Bot\n\nSelect Year to Download:", 
+                     reply_markup=markup)
+
+bot.infinity_polling()
