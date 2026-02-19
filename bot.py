@@ -1,47 +1,212 @@
-import telebot
-from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
-
-TOKEN = "8400705202:AAENgsxS7uqsHmMDOxeaaI9mKwuv7viVklY"
-bot = telebot.TeleBot(TOKEN)
-
-@bot.message_handler(commands=['start'])
-def start(message):
-    markup = InlineKeyboardMarkup()
-    btn1 = InlineKeyboardButton("RPSC 1st Grade", callback_data="rpsc")
-    markup.add(btn1)
-
-    bot.send_message(message.chat.id,
-                     "📚 Welcome to All Old Papers Bot\n\nSelect Exam:",
-                     reply_markup=markup)
-
-
-@bot.callback_query_handler(func=lambda call: True)
-def callback_query(call):
-
-    if call.data == "rpsc":
-        markup = InlineKeyboardMarkup()
-        btn1 = InlineKeyboardButton("Political Science", callback_data="polsci")
-        markup.add(btn1)
-
-        bot.edit_message_text("Select Subject:",
-                              call.message.chat.id,
-                              call.message.message_id,
-                              reply_markup=markup)
-
-    elif call.data == "polsci":
-        markup = InlineKeyboardMarkup()
-        btn1 = InlineKeyboardButton("2018 Paper", url="https://example.com/2018.pdf")
-        btn2 = InlineKeyboardButton("2020 Paper", url="https://example.com/2020.pdf")
-        btn3 = InlineKeyboardButton("2022 Paper", url="https://example.com/2022.pdf")
-        btn4 = InlineKeyboardButton("2023 Paper", url="https://example.com/2023.pdf")
-
-        markup.add(btn1, btn2)
-        markup.add(btn3, btn4)
-
-        bot.edit_message_text("Select Year:",
-                              call.message.chat.id,
-                              call.message.message_id,
-                              reply_markup=markup)
-
-
-bot.infinity_polling()
+[
+  {
+    "exam_code": "RAS",
+    "full_name": "राजस्थान प्रशासनिक सेवा परीक्षा",
+    "level": "High",
+    "department": "प्रशासनिक अधिकारी",
+    "papers": [
+      {"year": 2021, "type": "Pre"}, {"year": 2021, "type": "Mains"}, {"year": 2021, "type": "Interview"},
+      {"year": 2020, "type": "Pre"}, {"year": 2020, "type": "Mains"}, {"year": 2019, "type": "Pre"},
+      {"year": 2019, "type": "Mains"}, {"year": 2018, "type": "Pre"}, {"year": 2018, "type": "Mains"},
+      {"year": 2017, "type": "Pre"}, {"year": 2017, "type": "Mains"}
+    ]
+  },
+  {
+    "exam_code": "RPSC_APO",
+    "full_name": "Assistant Prosecution Officer",
+    "level": "High",
+    "department": "न्याय विभाग",
+    "papers": [
+      {"year": 2021, "type": "Exam"}, {"year": 2020, "type": "Exam"},
+      {"year": 2019, "type": "Exam"}, {"year": 2018, "type": "Exam"}, {"year": 2017, "type": "Exam"}
+    ]
+  },
+  {
+    "exam_code": "RPSC_AO",
+    "full_name": "Agriculture Officer",
+    "level": "High",
+    "department": "कृषि विभाग",
+    "papers": [
+      {"year": 2021, "type": "Exam"}, {"year": 2020, "type": "Exam"}, {"year": 2019, "type": "Exam"},
+      {"year": 2018, "type": "Exam"}, {"year": 2017, "type": "Exam"}
+    ]
+  },
+  {
+    "exam_code": "RPSC_TGT",
+    "full_name": "1st Grade Teacher Recruitment",
+    "level": "Mid",
+    "department": "उच्च माध्यमिक शिक्षक",
+    "papers": [
+      {"year": 2021, "type": "Exam"}, {"year": 2020, "type": "Exam"}, {"year": 2019, "type": "Exam"},
+      {"year": 2018, "type": "Exam"}, {"year": 2017, "type": "Exam"}
+    ]
+  },
+  {
+    "exam_code": "RPSC_PGT",
+    "full_name": "2nd Grade Teacher Recruitment",
+    "level": "Mid",
+    "department": "माध्यमिक शिक्षक",
+    "papers": [
+      {"year": 2021, "type": "Exam"}, {"year": 2020, "type": "Exam"}, {"year": 2019, "type": "Exam"},
+      {"year": 2018, "type": "Exam"}, {"year": 2017, "type": "Exam"}
+    ]
+  },
+  {
+    "exam_code": "RSMSSB_PTI",
+    "full_name": "Physical Education Instructor",
+    "level": "Mid",
+    "department": "शारीरिक शिक्षा प्रशिक्षक",
+    "papers": [
+      {"year": 2021, "type": "Exam"}, {"year": 2020, "type": "Exam"}, {"year": 2019, "type": "Exam"},
+      {"year": 2018, "type": "Exam"}, {"year": 2017, "type": "Exam"}
+    ]
+  },
+  {
+    "exam_code": "RSMSSB_CI",
+    "full_name": "Basic & Senior Computer Instructor",
+    "level": "Mid",
+    "department": "तकनीकी शिक्षक / कंप्यूटर प्रशिक्षक",
+    "papers": [
+      {"year": 2021, "type": "Exam"}, {"year": 2020, "type": "Exam"}, {"year": 2019, "type": "Exam"},
+      {"year": 2018, "type": "Exam"}, {"year": 2017, "type": "Exam"}
+    ]
+  },
+  {
+    "exam_code": "RSMSSB_LIB",
+    "full_name": "Librarian / Library Staff",
+    "level": "Mid",
+    "department": "पुस्तकालय कर्मचारी",
+    "papers": [
+      {"year": 2021, "type": "Exam"}, {"year": 2020, "type": "Exam"}, {"year": 2019, "type": "Exam"},
+      {"year": 2018, "type": "Exam"}, {"year": 2017, "type": "Exam"}
+    ]
+  },
+  {
+    "exam_code": "REET_L1",
+    "full_name": "REET Level 1",
+    "level": "Entry",
+    "department": "शिक्षक पात्रता परीक्षा",
+    "papers": [
+      {"year": 2022, "type": "Exam"}, {"year": 2019, "type": "Exam"}, {"year": 2017, "type": "Exam"}
+    ]
+  },
+  {
+    "exam_code": "REET_L2",
+    "full_name": "REET Level 2",
+    "level": "Entry",
+    "department": "शिक्षक पात्रता परीक्षा",
+    "papers": [
+      {"year": 2022, "type": "Exam"}, {"year": 2019, "type": "Exam"}, {"year": 2017, "type": "Exam"}
+    ]
+  },
+  {
+    "exam_code": "RSMSSB_PATWARI",
+    "full_name": "Patwari Recruitment",
+    "level": "Entry",
+    "department": "ग्राम राजस्व अधिकारी",
+    "papers": [
+      {"year": 2021, "type": "Exam"}, {"year": 2020, "type": "Exam"}, {"year": 2019, "type": "Exam"},
+      {"year": 2018, "type": "Exam"}, {"year": 2017, "type": "Exam"}
+    ]
+  },
+  {
+    "exam_code": "RSMSSB_VDO",
+    "full_name": "Village Development Officer",
+    "level": "Entry",
+    "department": "ग्राम विकास अधिकारी",
+    "papers": [
+      {"year": 2021, "type": "Exam"}, {"year": 2020, "type": "Exam"}, {"year": 2019, "type": "Exam"},
+      {"year": 2018, "type": "Exam"}, {"year": 2017, "type": "Exam"}
+    ]
+  },
+  {
+    "exam_code": "RSMSSB_GRAMSEVAK",
+    "full_name": "Gram Sevak",
+    "level": "Entry",
+    "department": "ग्राम स्तर सेवा कर्मचारी",
+    "papers": [
+      {"year": 2021, "type": "Exam"}, {"year": 2020, "type": "Exam"}, {"year": 2019, "type": "Exam"},
+      {"year": 2018, "type": "Exam"}, {"year": 2017, "type": "Exam"}
+    ]
+  },
+  {
+    "exam_code": "RSMSSB_JAILPRAHARI",
+    "full_name": "Jail Prahari",
+    "level": "Entry",
+    "department": "जेल विभाग",
+    "papers": [
+      {"year": 2021, "type": "Exam"}, {"year": 2020, "type": "Exam"}, {"year": 2019, "type": "Exam"},
+      {"year": 2018, "type": "Exam"}, {"year": 2017, "type": "Exam"}
+    ]
+  },
+  {
+    "exam_code": "RSMSSB_4THGRADE",
+    "full_name": "4th Grade Staff",
+    "level": "Entry",
+    "department": "चतुर्थ श्रेणी कर्मचारी",
+    "papers": [
+      {"year": 2021, "type": "Exam"}, {"year": 2020, "type": "Exam"}, {"year": 2019, "type": "Exam"},
+      {"year": 2018, "type": "Exam"}, {"year": 2017, "type": "Exam"}
+    ]
+  },
+  {
+    "exam_code": "RSMSSB_LDC",
+    "full_name": "LDC / Clerk",
+    "level": "Entry",
+    "department": "कनिष्ठ सहायक / डाटा एंट्री",
+    "papers": [
+      {"year": 2021, "type": "Exam"}, {"year": 2020, "type": "Exam"}, {"year": 2019, "type": "Exam"},
+      {"year": 2018, "type": "Exam"}, {"year": 2017, "type": "Exam"}
+    ]
+  },
+  {
+    "exam_code": "RSMSSB_TAX",
+    "full_name": "Tax Assistant / Kar Sahayak",
+    "level": "Entry",
+    "department": "वित्त विभाग",
+    "papers": [
+      {"year": 2021, "type": "Exam"}, {"year": 2020, "type": "Exam"}, {"year": 2019, "type": "Exam"},
+      {"year": 2018, "type": "Exam"}, {"year": 2017, "type": "Exam"}
+    ]
+  },
+  {
+    "exam_code": "RSMSSB_AGRI_SUP",
+    "full_name": "Agriculture Supervisor",
+    "level": "Entry",
+    "department": "कृषि विभाग",
+    "papers": [
+      {"year": 2021, "type": "Exam"}, {"year": 2020, "type": "Exam"}, {"year": 2019, "type": "Exam"},
+      {"year": 2018, "type": "Exam"}, {"year": 2017, "type": "Exam"}
+    ]
+  },
+  {
+    "exam_code": "RPSC_SI",
+    "full_name": "Sub-Inspector (राजस्थान पुलिस SI)",
+    "level": "Entry",
+    "department": "पुलिस विभाग",
+    "papers": [
+      {"year": 2021, "type": "Exam"}, {"year": 2020, "type": "Exam"}, {"year": 2019, "type": "Exam"},
+      {"year": 2018, "type": "Exam"}, {"year": 2017, "type": "Exam"}
+    ]
+  },
+  {
+    "exam_code": "RSMSSB_FOREST",
+    "full_name": "Forest Guard",
+    "level": "Entry",
+    "department": "वन विभाग",
+    "papers": [
+      {"year": 2021, "type": "Exam"}, {"year": 2020, "type": "Exam"}, {"year": 2019, "type": "Exam"},
+      {"year": 2018, "type": "Exam"}, {"year": 2017, "type": "Exam"}
+    ]
+  },
+  {
+    "exam_code": "RSMSSB_HEALTH",
+    "full_name": "Health / CHO / Physical Worker",
+    "level": "Entry",
+    "department": "स्वास्थ्य विभाग",
+    "papers": [
+      {"year": 2021, "type": "Exam"}, {"year": 2020, "type": "Exam"}, {"year": 2019, "type": "Exam"},
+      {"year": 2018, "type": "Exam"}, {"year": 2017, "type": "Exam"}
+    ]
+  }
+]
